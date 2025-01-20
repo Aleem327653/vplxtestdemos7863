@@ -1,16 +1,17 @@
 package com.vplx.controller
 
 import com.vplx.model.*
+import com.vplx.service.DumpConfigService
 import com.vplx.utility.DomCreator
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.io.File
 
 @RestController
 @RequestMapping("vplx")
 class VplxController {
+    @Autowired
+    lateinit var dumpConfigService: DumpConfigService
     val xmlFile = File("D:\\MohdAleem\\VPlxDemo\\VPlxDemo\\VPlxDemo\\src\\main\\resources\\cyfair_cluster-1_vplx 1.xml")
 
     val initiator=DomCreator.fetchInitiatorFromXml(xmlFile)
@@ -47,5 +48,6 @@ class VplxController {
 
     @GetMapping("topLevelDevices")
     fun getAllTopLevelDevices():TopLevelDevices=topLevelDevices
+
 
 }
