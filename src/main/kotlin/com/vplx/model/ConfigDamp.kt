@@ -1,6 +1,8 @@
 package com.vplx.model
 
-
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 
 
 data class ConfigDump(
@@ -15,20 +17,26 @@ data class ConfigDump(
     val systemVolumes: SystemVolumes
 )
 
-
+@Entity
 data class Cluster(
     val managementIP: String,
     val version: String,
     val name: String,
     val topLevelAssembly: String,
+
+    @Id
     val id: String,
+
+    @OneToMany
     val plexControlDirector: List<PlexControlDirector>
 )
 
+@Entity
 data class PlexControlDirector(
     val name: String,
     val type: String,
     val hostname: String,
+    @Id
     val id: String
 )
 
@@ -49,24 +57,6 @@ data class Port(
 
 )
 
-data class Port1(
-    val name: String,
-    val maxSpeed: String,
-    val enabled: String,
-    val subnet: String,
-    val operationalStatus: String,
-    val portStatus: String,
-    val configStatus: String,
-    val macAddress: String,
-    val optionSet: String,
-    val speed: String,
-    val role: String,
-    val protocols: String,
-    val mtu: String,
-    val address: String
-)
-
-
 data class Disks(
     val disk: List<Disk>
 )
@@ -80,11 +70,6 @@ data class Disk(
     val id: String,
     val use: String,
     val paths: List<Path>
-)
-
-
-data class Paths(
-    val path: List<Path>
 )
 
 
@@ -246,4 +231,22 @@ data class MetaVolume(
     val geometry: String,
     val blockCount: Long,
     val components: Components
+)
+
+
+data class Port1(
+    val name: String,
+    val maxSpeed: String,
+    val enabled: String,
+    val subnet: String,
+    val operationalStatus: String,
+    val portStatus: String,
+    val configStatus: String,
+    val macAddress: String,
+    val optionSet: String,
+    val speed: String,
+    val role: String,
+    val protocols: String,
+    val mtu: String,
+    val address: String
 )
